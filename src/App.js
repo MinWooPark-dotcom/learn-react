@@ -1,24 +1,16 @@
-import React, { useState } from "react";
-import loadable from "@loadable/component";
-const Lazy = loadable(() => import("./Code Spliting/CodeSpliting"), {
-  fallback: <div>loading...</div>,
-});
+import React from "react";
+import { Route } from "react-router-dom";
+import Menu from "./Server Side Rendering/Menu";
+import BluePage from "./Server Side Rendering/pages/BluePage";
+import RedPage from "./Server Side Rendering/pages/RedPage";
 
 const App = () => {
-  const [visible, setVisible] = useState(false);
-  const onClick = () => {
-    setVisible(true);
-  };
-  const onMouseOver = () => {
-    Lazy.preload();
-  };
-
   return (
     <div>
-      <div onClick={onClick} onMouseOver={onMouseOver}>
-        Click Me!
-      </div>
-      {visible && <Lazy />}
+      <Menu />
+      <hr />
+      <Route path="/red" component={RedPage} />
+      <Route path="/blue" component={BluePage} />
     </div>
   );
 };
